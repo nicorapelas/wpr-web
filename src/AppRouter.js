@@ -1,0 +1,93 @@
+import React, { useContext, useEffect } from 'react'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom'
+
+import LoaderFullScreen from './components/common/loaders/fullScreenLoader/LoaderFullScreen'
+import NotFound from './components/common/notFound/NotFound'
+import Landing from './components/screens/landing/Landing'
+import SignupHR from './components/screens/authScreens/signup/Signup'
+import Login from './components/screens/authScreens/login/Login'
+import Dashboard from './components/screens/dashboard/Dashboard'
+import InitDataFetch from './components/InitDataFetch'
+import CheckoutPage from './components/screens/checkout/Checkout'
+import PaymentSuccess from './components/screens/checkout/PaymentSuccess'
+import PaymentCancelled from './components/screens/checkout/PaymentCancelled'
+import CardsAdmin from './components/screens/cardsAdmin/CardsAdmin'
+import { Context as AuthContext } from './context/AuthContext'
+
+const AppRouter = () => {
+  const {
+    state: { token, isAuthChecked },
+    tryLocalSignin,
+    fetchUser,
+    setIsAuthChecked,
+  } = useContext(AuthContext)
+
+  useEffect(() => {
+    if (!isAuthChecked) {
+      const checkAuth = async () => {
+        await tryLocalSignin()
+        setIsAuthChecked(true)
+      }
+      checkAuth()
+    }
+  }, [isAuthChecked])
+
+  useEffect(() => {
+    if (token) {
+      fetchUser()
+    }
+  }, [token])
+
+  // Don't render routes until we've checked auth
+  if (!isAuthChecked) {
+    return <LoaderFullScreen />
+  }
+
+  const router = () => {
+    return (
+      <>
+        <InitDataFetch />
+        <Router>
+          <Routes>
+            {/* Protected Routes */}
+            <Route
+              path="/dashboard"
+              element={
+                token ? (
+                  <Dashboard />
+                ) : (
+                  <>
+                    <Navigate to="/login" replace />
+                  </>
+                )
+              }
+            />
+            <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/payment-success" element={<PaymentSuccess />} />
+            <Route path="/payment-cancelled" element={<PaymentCancelled />} />
+            {/* Admin Routes */}
+            <Route path="/cards-admin" element={<CardsAdmin />} />
+            {/* Auth Routes */}
+            <Route
+              path="/login"
+              element={token ? <Navigate to="/dashboard" replace /> : <Login />}
+            />
+            <Route path="/signup" element={<SignupHR />} />
+            {/* Public Routes */}
+            <Route path="/" element={<Landing />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Router>
+      </>
+    )
+  }
+
+  return router()
+}
+
+export default AppRouter
