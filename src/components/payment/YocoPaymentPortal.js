@@ -1,14 +1,35 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { Context as YocoContext } from '../../context/YocoContext'
-import './yocoPaymentPortal.css'
+import { Context as CardsContext } from '../../context/CardsContext'
+import './yocoPaymentProtal.css'
 
 const YocoPaymentPortal = () => {
-  const { state, initiatePayment, clearPaymentData } = useContext(YocoContext)
+  const {
+    state: { confirmPurchase },
+    initiatePayment,
+    setConfirmPurchase,
+  } = useContext(YocoContext)
+
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
-  const [showConfirmation, setShowConfirmation] = useState(false)
 
-  const handlePayment = async () => {
+  const {
+    state: { cardToBuy },
+    setCardToBuy,
+  } = useContext(CardsContext)
+
+  useEffect(() => {
+    console.log('confirmPurchase', confirmPurchase)
+    console.log('cardToBuy', cardToBuy)
+    if (confirmPurchase) {
+      const { productCode, price } = cardToBuy
+      handlePayment(productCode, price)
+      setCardToBuy(null)
+      setConfirmPurchase(false)
+    }
+  }, [confirmPurchase, cardToBuy])
+
+  const handlePayment = async (productCode, price) => {
     try {
       setLoading(true)
       setError(null)
@@ -17,14 +38,18 @@ const YocoPaymentPortal = () => {
       localStorage.setItem('paymentStartTime', startTime)
       localStorage.setItem('paymentInProgress', 'true')
 
-      await initiatePayment({
-        amountInCents: 2799,
+      const response = await initiatePayment({
+        amountInCents: price,
         currency: 'ZAR',
-        description: 'Test Purchase',
+        description: productCode,
       })
 
-      setLoading(false)
-      setShowConfirmation(true)
+      if (response?.redirectUrl) {
+        window.location.href = response.redirectUrl
+      } else {
+        setError('No redirect URL available')
+        setLoading(false)
+      }
     } catch (error) {
       console.error('Payment error:', error)
       setError(error.message || 'Failed to initialize payment')
@@ -32,45 +57,13 @@ const YocoPaymentPortal = () => {
     }
   }
 
-  const handleProceedToPayment = () => {
-    if (state.paymentData?.redirectUrl) {
-      window.location.href = state.paymentData.redirectUrl
-    } else {
-      setError('No redirect URL available')
-    }
-  }
-
-  const handleCancelPayment = () => {
-    localStorage.removeItem('paymentInProgress')
-    localStorage.removeItem('paymentStartTime')
-    clearPaymentData()
-    window.location.href = '/payment-cancelled'
-  }
-
   return (
     <div className="payment-container">
       <h2>Make Payment</h2>
       {error && <div className="error-message">{error}</div>}
-
-      {!showConfirmation ? (
-        <button
-          onClick={handlePayment}
-          disabled={loading}
-          className="payment-button"
-        >
-          {loading ? 'Processing...' : 'Pay with Card'}
-        </button>
-      ) : (
-        <div className="confirmation-screen">
-          <p>You will be redirected to Yoco's secure payment page.</p>
-          <button onClick={handleProceedToPayment} className="proceed-button">
-            Proceed to Payment
-          </button>
-          <button onClick={handleCancelPayment} className="cancel-button">
-            Cancel Payment
-          </button>
-        </div>
-      )}
+      <div className="payment-status">
+        {loading ? 'Processing...' : 'Pay with Card'}
+      </div>
     </div>
   )
 }

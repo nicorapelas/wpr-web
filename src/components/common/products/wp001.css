@@ -11,7 +11,6 @@
   }
   
   .product-image {
-    width: 100%;
     padding: 10px;
     background: #f7c926;
     border-radius: 8px;
@@ -50,23 +49,6 @@
     text-overflow: ellipsis;
   }
   
-  /* Media query for larger screens */
-  @media (min-width: 768px) {
-    .product-card {
-      flex-direction: row;
-    }
-  
-    .product-image {
-      flex: 0 0 40%;
-      margin-bottom: 0;
-    }
-  
-    .product-details {
-      flex: 1;
-      padding-left: 10px;
-    }
-  }
-  
   .coupon-button {
     width: 100%;
     padding: 8px;
@@ -88,3 +70,28 @@
   .coupon-button:active {
     transform: scale(0.98);
   }
+
+  /* Media query for larger screens */
+  @media (min-width: 768px) {
+    .product-card {
+      flex-direction: row;
+    }
+  
+    .product-image {
+      flex: 0 0 40%;
+      margin-bottom: 0;
+    }
+  
+    .product-details {
+      flex: 1;
+      padding-left: 10px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .product-card {
+      width: 100px;
+    }
+  }
+  
+  

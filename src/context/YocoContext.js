@@ -15,6 +15,8 @@ const yocoReducer = (state, action) => {
       return { ...state, paymentData: action.payload, loading: false }
     case 'CLEAR_PAYMENT_DATA':
       return { ...state, paymentData: null }
+    case 'SET_CONFIRM_PURCHASE':
+      return { ...state, confirmPurchase: action.payload }
     default:
       return state
   }
@@ -51,16 +53,23 @@ const clearPaymentData = (dispatch) => () => {
   dispatch({ type: 'CLEAR_PAYMENT_DATA' })
 }
 
+const setConfirmPurchase = (dispatch) => (value) => {
+  dispatch({ type: 'SET_CONFIRM_PURCHASE', payload: value })
+}
+
 export const { Context, Provider } = createDataContext(
   yocoReducer,
   {
     clearError,
     initiatePayment,
     clearPaymentData,
+    setConfirmPurchase,
   },
   {
     loading: false,
     errorMessage: null,
     paymentData: null,
+    confirmPurchase: false,
+    confirmPurchase: false,
   },
 )

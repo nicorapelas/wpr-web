@@ -1,39 +1,42 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import './paymentResult.css'
+
 const PaymentCancelled = () => {
   const navigate = useNavigate()
   const [countdown, setCountdown] = useState(5)
 
+  // Log component mount and parameters
   useEffect(() => {
-    // Log component mount and URL parameters for debugging
     console.log('Payment Cancelled component mounted')
     const params = new URLSearchParams(window.location.search)
     console.log('URL Parameters:', Object.fromEntries(params.entries()))
+  }, [])
 
-    // Start countdown for automatic redirect
+  // Handle countdown in separate effect
+  useEffect(() => {
     const timer = setInterval(() => {
-      setCountdown((prev) => {
-        if (prev <= 1) {
-          clearInterval(timer)
-          navigate('/') // or navigate('/dashboard') depending on your flow
-          return 0
-        }
-        return prev - 1
-      })
+      setCountdown((prev) => prev - 1)
     }, 1000)
 
     return () => clearInterval(timer)
-  }, [navigate])
+  }, [])
+
+  // Handle navigation in separate effect
+  useEffect(() => {
+    if (countdown <= 0) {
+      navigate('/dashboard')
+    }
+  }, [countdown, navigate])
 
   return (
     <div className="payment-result-container">
-      <h2>Payment Cancelled</h2>
-      <p>Your payment was cancelled. No charges were made.</p>
-      <p>Redirecting to home in {countdown} seconds...</p>
-      <button onClick={() => navigate('/')} className="back-button">
-        Back to Home Now
-      </button>
+      <div className="payment-result-content">
+        <h2>Payment Cancelled</h2>
+        <p>Your payment was cancelled.</p>
+        <p>Redirecting in {countdown} seconds...</p>
+      </div>
     </div>
   )
 }
