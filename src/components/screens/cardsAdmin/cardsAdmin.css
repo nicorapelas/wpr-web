@@ -8,10 +8,25 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #dee2e6;
+  }
+
+  .card-details {
+    padding: 20px;
+    color: #fff;
   }
   
-  .cards-list-header h3,
+  .card-details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(244, 214, 61, 0.2);
+  }
+  
   .card-details-header h3 {
     color: #f4d63d;
     margin: 0;
@@ -38,21 +53,26 @@
   }
   
   .status-badge {
+    display: inline-block;
     padding: 4px 8px;
     border-radius: 4px;
-    font-size: 0.875rem;
+    font-size: 0.9rem;
+    font-weight: 500;
   }
   
   .status-badge.created {
-    background-color: rgba(244, 214, 61, 0.2);
-    color: #f4d63d;
-    border: 1px solid #f4d63d;
+    background: #e3f2fd;
+    color: #1976d2;
+  }
+  
+  .status-badge.sold {
+    background: #e8f5e9;
+    color: #2e7d32;
   }
   
   .status-badge.used {
-    background-color: rgba(76, 175, 80, 0.2);
-    color: #4CAF50;
-    border: 1px solid #4CAF50;
+    background: #ffebee;
+    color: #c62828;
   }
   
   .status-badge.expired {
@@ -71,15 +91,20 @@
   .info-row {
     display: flex;
     margin-bottom: 12px;
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    border: 1px solid rgba(244, 214, 61, 0.1);
   }
   
   .info-row label {
-    width: 120px;
+    flex: 0 0 140px;
     font-weight: 600;
     color: #f4d63d;
   }
   
   .info-row span {
+    flex: 1;
     color: #fff;
   }
   
@@ -286,4 +311,15 @@
     border: 1px solid rgba(244, 214, 61, 0.2);
     border-radius: 4px;
     z-index: 1;
+  }
+  
+  .info-section {
+    margin-bottom: 24px;
+  }
+
+  .info-section h4 {
+    color: #f4d63d;
+    margin-bottom: 16px;
+    font-size: 1.1rem;
+    font-weight: 600;
   }

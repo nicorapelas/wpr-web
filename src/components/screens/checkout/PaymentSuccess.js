@@ -7,9 +7,7 @@ const PaymentSuccess = () => {
 
   // Log component mount and parameters
   useEffect(() => {
-    console.log('Payment Success component mounted')
     const params = new URLSearchParams(window.location.search)
-    console.log('URL Parameters:', Object.fromEntries(params.entries()))
   }, [])
 
   // Handle countdown and navigation in separate effect

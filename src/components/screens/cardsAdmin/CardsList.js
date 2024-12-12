@@ -3,10 +3,9 @@ import { Context as CardsContext } from '../../../context/CardsContext'
 import { cardsData } from './cardBatchToUpload/cardBatchToUpload'
 
 const CardsList = ({ cards, onViewDetails }) => {
-  const {
-    state: { loading, error },
-    createCardBatch,
-  } = useContext(CardsContext)
+  const { createCardBatch } = useContext(CardsContext)
+
+  console.log(cards)
 
   const createNewCardBatch = async () => {
     const cardsWithBatch = cardsData.cards.map((card) => ({
@@ -44,8 +43,8 @@ const CardsList = ({ cards, onViewDetails }) => {
           </span>
         </div>
         <div className="stat-box">
-          <label>Used</label>
-          <span>{cards.filter((card) => card.status === 'used').length}</span>
+          <label>Sold</label>
+          <span>{cards.filter((card) => card.status === 'sold').length}</span>
         </div>
       </div>
 
@@ -55,12 +54,11 @@ const CardsList = ({ cards, onViewDetails }) => {
             <tr>
               <th>Batch ID</th>
               <th>Product</th>
+              <th>Product Code</th>
               <th>Card No.</th>
-              <th>Account</th>
               <th>Password</th>
               <th>Status</th>
-              <th>Used By</th>
-              <th>Used At</th>
+              <th>Purchesed At</th>
               <th>Created At</th>
               <th>Updated At</th>
               <th>Actions</th>
@@ -73,16 +71,15 @@ const CardsList = ({ cards, onViewDetails }) => {
                   <span className="batch-id">{card.batchId}</span>
                 </td>
                 <td>{card.product}</td>
+                <td>{card.productCode || '-'}</td>
                 <td>{card.cardNo}</td>
-                <td>{card.account || '-'}</td>
                 <td>{card.password}</td>
                 <td>
                   <span className={`status-badge ${card.status}`}>
                     {card.status}
                   </span>
                 </td>
-                <td>{card.usedBy?.username || '-'}</td>
-                <td>{formatDate(card.usedAt)}</td>
+                <td>{formatDate(card.purchasedAt)}</td>
                 <td>{formatDate(card.createdAt)}</td>
                 <td>{formatDate(card.updatedAt)}</td>
                 <td>

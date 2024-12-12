@@ -3,6 +3,7 @@ import React, { useContext } from 'react'
 import { Context as AuthContext } from '../../../context/AuthContext'
 import { Context as CardsContext } from '../../../context/CardsContext'
 import WP001 from '../../common/products/WP001'
+import WP002 from '../../common/products/WP002'
 import CardToBuyConfirm from './cardToBuyConfirm/CardToBuyConfirm'
 import './dashboard.css'
 
@@ -17,8 +18,6 @@ const Dashboard = () => {
     setIsAuthChecked(false)
   }
 
-  console.log(`cardToBuy:`, cardToBuy)
-
   const renderContent = () => {
     if (cardToBuy) {
       return <CardToBuyConfirm />
@@ -30,6 +29,7 @@ const Dashboard = () => {
         </button>
         <main className="dashboard-content">
           <WP001 />
+          <WP002 />
         </main>
       </div>
     )

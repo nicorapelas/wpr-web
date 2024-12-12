@@ -6,12 +6,13 @@ import './paymentResult.css'
 const PaymentCancelled = () => {
   const navigate = useNavigate()
   const [countdown, setCountdown] = useState(5)
+  const [cancelReason, setCancelReason] = useState('')
 
-  // Log component mount and parameters
+  // Log component mount and get cancellation reason
   useEffect(() => {
-    console.log('Payment Cancelled component mounted')
     const params = new URLSearchParams(window.location.search)
-    console.log('URL Parameters:', Object.fromEntries(params.entries()))
+    const reason = params.get('reason')
+    setCancelReason(reason)
   }, [])
 
   // Handle countdown in separate effect
@@ -30,11 +31,22 @@ const PaymentCancelled = () => {
     }
   }, [countdown, navigate])
 
+  const getCancelMessage = () => {
+    switch (cancelReason) {
+      case 'user_back':
+        return "Payment was cancelled using the browser's back button."
+      case 'browser_back':
+        return 'Payment was cancelled using the back button.'
+      default:
+        return 'Payment was cancelled.'
+    }
+  }
+
   return (
     <div className="payment-result-container">
       <div className="payment-result-content">
         <h2>Payment Cancelled</h2>
-        <p>Your payment was cancelled.</p>
+        <p>{getCancelMessage()}</p>
         <p>Redirecting in {countdown} seconds...</p>
       </div>
     </div>

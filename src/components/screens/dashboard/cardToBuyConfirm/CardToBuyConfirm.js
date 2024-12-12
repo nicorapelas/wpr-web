@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { Context as CardsContext } from '../../../../context/CardsContext'
 import { Context as YocoContext } from '../../../../context/YocoContext'
 import WP001 from '../../../common/products/WP001'
+import WP002 from '../../../common/products/WP002'
 import './cardToBuyConfirm.css'
 
 const CardToBuyConfirm = () => {
@@ -17,8 +18,13 @@ const CardToBuyConfirm = () => {
   const navigate = useNavigate()
 
   const renderSelectedCard = () => {
-    if (cardToBuy.productCode === 'WP001') {
-      return <WP001 />
+    switch (cardToBuy.productCode) {
+      case 'WP001':
+        return <WP001 />
+      case 'WP002':
+        return <WP002 />
+      default:
+        return null
     }
   }
 

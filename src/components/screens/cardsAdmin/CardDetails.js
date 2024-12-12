@@ -1,7 +1,12 @@
 import React from 'react'
+import './cardsAdmin.css'
 
 const CardDetails = ({ card, onBack }) => {
   if (!card) return null
+
+  const formatDate = (date) => {
+    return date ? new Date(date).toLocaleString() : '-'
+  }
 
   return (
     <div className="card-details">
@@ -13,34 +18,61 @@ const CardDetails = ({ card, onBack }) => {
       </div>
 
       <div className="card-info">
-        <div className="info-row">
-          <label>Product:</label>
-          <span>{card.product}</span>
+        <div className="info-section">
+          <h4>Basic Information</h4>
+          <div className="info-row">
+            <label>Batch ID:</label>
+            <span>{card.batchId}</span>
+          </div>
+          <div className="info-row">
+            <label>Product:</label>
+            <span>{card.product}</span>
+          </div>
+          <div className="info-row">
+            <label>Product Code:</label>
+            <span>{card.productCode}</span>
+          </div>
+          <div className="info-row">
+            <label>Card Number:</label>
+            <span>{card.cardNo}</span>
+          </div>
+          <div className="info-row">
+            <label>Password:</label>
+            <span>{card.password}</span>
+          </div>
         </div>
-        <div className="info-row">
-          <label>Card No:</label>
-          <span>{card.cardNo}</span>
+
+        <div className="info-section">
+          <h4>Status Information</h4>
+          <div className="info-row">
+            <label>Status:</label>
+            <span className={`status-badge ${card.status}`}>{card.status}</span>
+          </div>
+          {card.purchasedBy && (
+            <>
+              <div className="info-row">
+                <label>Purchased By:</label>
+                <span>{card.purchasedBy}</span>
+              </div>
+              <div className="info-row">
+                <label>Purchased At:</label>
+                <span>{formatDate(card.purchasedAt)}</span>
+              </div>
+            </>
+          )}
         </div>
-        <div className="info-row">
-          <label>Password:</label>
-          <span>{card.password}</span>
+
+        <div className="info-section">
+          <h4>Timestamps</h4>
+          <div className="info-row">
+            <label>Created At:</label>
+            <span>{formatDate(card.createdAt)}</span>
+          </div>
+          <div className="info-row">
+            <label>Updated At:</label>
+            <span>{formatDate(card.updatedAt)}</span>
+          </div>
         </div>
-        <div className="info-row">
-          <label>Status:</label>
-          <span className={`status-badge ${card.status}`}>{card.status}</span>
-        </div>
-        {card.usedBy && (
-          <>
-            <div className="info-row">
-              <label>Used By:</label>
-              <span>{card.usedBy}</span>
-            </div>
-            <div className="info-row">
-              <label>Used At:</label>
-              <span>{new Date(card.usedAt).toLocaleString()}</span>
-            </div>
-          </>
-        )}
       </div>
     </div>
   )

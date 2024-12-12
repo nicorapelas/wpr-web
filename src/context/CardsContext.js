@@ -9,7 +9,7 @@ const CardsReducer = (state, action) => {
     case 'ADD_ERROR':
       return { ...state, error: action.payload, loading: false }
     case 'FETCH_CARDS':
-      return { ...state, availableCards: action.payload, loading: false }
+      return { ...state, cards: action.payload, loading: false }
     case 'ADD_CARDS':
       return {
         ...state,
@@ -38,7 +38,6 @@ const fetchCards = (dispatch) => async () => {
     dispatch({ type: 'FETCH_CARDS', payload: response.data })
   } catch (error) {
     dispatch({ type: 'ADD_ERROR', payload: 'Could not fetch cards' })
-    console.log(error)
   }
 }
 

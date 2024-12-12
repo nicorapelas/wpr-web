@@ -17,6 +17,8 @@ const yocoReducer = (state, action) => {
       return { ...state, paymentData: null }
     case 'SET_CONFIRM_PURCHASE':
       return { ...state, confirmPurchase: action.payload }
+    case 'SET_PAYMENT_TRIGGERED':
+      return { ...state, paymentTriggered: action.payload }
     default:
       return state
   }
@@ -27,11 +29,9 @@ const clearError = (dispatch) => () => {
 }
 
 const initiatePayment = (dispatch) => async (paymentData) => {
-  console.log(`paymentData`, paymentData)
   try {
     dispatch({ type: 'SET_LOADING' })
     const response = await ngrokApi.post('/payment/create-payment', paymentData)
-    console.log(`response`, response.data)
     dispatch({
       type: 'SET_PAYMENT_DATA',
       payload: {
@@ -49,6 +49,10 @@ const initiatePayment = (dispatch) => async (paymentData) => {
   }
 }
 
+const setPaymentTriggered = (dispatch) => (value) => {
+  dispatch({ type: 'SET_PAYMENT_TRIGGERED', payload: value })
+}
+
 const clearPaymentData = (dispatch) => () => {
   dispatch({ type: 'CLEAR_PAYMENT_DATA' })
 }
@@ -64,12 +68,13 @@ export const { Context, Provider } = createDataContext(
     initiatePayment,
     clearPaymentData,
     setConfirmPurchase,
+    setPaymentTriggered,
   },
   {
     loading: false,
     errorMessage: null,
     paymentData: null,
     confirmPurchase: false,
-    confirmPurchase: false,
+    paymentTriggered: false,
   },
 )

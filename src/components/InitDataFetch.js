@@ -6,12 +6,6 @@ const InitDataFetch = () => {
     state: { user },
   } = useContext(AuthContext)
 
-  useEffect(() => {
-    if (user) {
-      console.log(`fetch data`)
-    }
-  }, [user])
-
   return null
 }
 
