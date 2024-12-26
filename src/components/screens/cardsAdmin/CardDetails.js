@@ -1,7 +1,36 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
+
+import CardOwner from './cardOwner/CardOwner'
+import PurchaseHistory from './purchaseHistory/PurchaseHistory'
+import { Context as CardsContext } from '../../../context/CardsContext'
+import { Context as YocoContext } from '../../../context/YocoContext'
 import './cardsAdmin.css'
 
 const CardDetails = ({ card, onBack }) => {
+  const {
+    state: { cardOwner },
+    fetchCardOwner,
+  } = useContext(CardsContext)
+
+  const {
+    state: { paymentHistory },
+    fetchPaymentHistory,
+  } = useContext(YocoContext)
+
+  console.log(paymentHistory)
+
+  useEffect(() => {
+    if (card.purchasedBy) {
+      fetchCardOwner(card.purchasedBy)
+    }
+  }, [card])
+
+  useEffect(() => {
+    if (cardOwner) {
+      fetchPaymentHistory(cardOwner._id)
+    }
+  }, [cardOwner])
+
   if (!card) return null
 
   const formatDate = (date) => {
@@ -48,18 +77,6 @@ const CardDetails = ({ card, onBack }) => {
             <label>Status:</label>
             <span className={`status-badge ${card.status}`}>{card.status}</span>
           </div>
-          {card.purchasedBy && (
-            <>
-              <div className="info-row">
-                <label>Purchased By:</label>
-                <span>{card.purchasedBy}</span>
-              </div>
-              <div className="info-row">
-                <label>Purchased At:</label>
-                <span>{formatDate(card.purchasedAt)}</span>
-              </div>
-            </>
-          )}
         </div>
 
         <div className="info-section">
@@ -73,6 +90,16 @@ const CardDetails = ({ card, onBack }) => {
             <span>{formatDate(card.updatedAt)}</span>
           </div>
         </div>
+        {card.purchasedBy && (
+          <>
+            <div className="info-row">
+              <label>Purchased At:</label>
+              <span>{formatDate(card.purchasedAt)}</span>
+            </div>
+          </>
+        )}
+        <CardOwner owner={cardOwner} />
+        <PurchaseHistory paymentHistory={paymentHistory} />
       </div>
     </div>
   )

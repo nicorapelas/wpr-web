@@ -1,7 +1,7 @@
 import createDataContext from './createDataContext'
 import ngrokApi from '../api/ngrok'
 
-const yocoReducer = (state, action) => {
+const payfastReducer = (state, action) => {
   switch (action.type) {
     case 'SET_LOADING':
       return { ...state, loading: true }
@@ -33,7 +33,13 @@ const clearError = (dispatch) => () => {
 const initiatePayment = (dispatch) => async (paymentData) => {
   try {
     dispatch({ type: 'SET_LOADING' })
+    console.log('Initiating Payfast payment with:', paymentData)
+
+    // Make sure we're hitting the Payfast endpoint
     const response = await ngrokApi.post('/payment/create-payment', paymentData)
+
+    console.log('Payfast response:', response.data)
+
     dispatch({
       type: 'SET_PAYMENT_DATA',
       payload: {
@@ -43,6 +49,7 @@ const initiatePayment = (dispatch) => async (paymentData) => {
     })
     return response.data
   } catch (error) {
+    console.error('Payfast payment error:', error)
     dispatch({
       type: 'SET_ERROR',
       payload: error.response?.data?.message || 'Payment initiation failed',
@@ -71,7 +78,7 @@ const fetchPaymentHistory = (dispatch) => async (ownerId) => {
 }
 
 export const { Context, Provider } = createDataContext(
-  yocoReducer,
+  payfastReducer,
   {
     clearError,
     initiatePayment,

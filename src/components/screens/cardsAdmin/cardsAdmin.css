@@ -109,7 +109,6 @@
   }
   
   .table {
-    width: 100%;
     background-color: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
     border-collapse: collapse;
@@ -138,10 +137,6 @@
     overflow-x: auto;
     min-width: 100%;
     max-width: 100%;
-  }
-  
-  .table {
-    min-width: 1400px;
   }
   
   .table th,
@@ -245,9 +240,6 @@
     max-width: 100%;
   }
   
-  .table {
-    min-width: 1400px;
-  }
   
   .table th,
   .table td {

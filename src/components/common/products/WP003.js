@@ -4,17 +4,17 @@ import { Context as CardsContext } from '../../../context/CardsContext'
 import logo from '../../../assets/images/logo/logo-512.png'
 import './wp000.css'
 
-const WP002 = () => {
+const WP003 = () => {
   const {
     state: { cardToBuy },
     setCardToBuy,
   } = useContext(CardsContext)
 
   const productDetails = [
-    { label: 'Quantity', value: '5' },
-    { label: 'productCode', value: 'WP002' },
-    { label: 'Price', value: '200.00' },
-    { label: 'PD', value: 'R40.00 each' },
+    { label: 'Quantity', value: '10' },
+    { label: 'productCode', value: 'WP003' },
+    { label: 'Price', value: '380.00' },
+    { label: 'PD', value: 'R38.00 each' },
     { label: 'Brand:', value: 'WATCHLISTPRO' },
     { label: 'Service Type:', value: 'VOD' },
     { label: 'Charging Type:', value: 'Recharge card' },
@@ -26,7 +26,7 @@ const WP002 = () => {
   ]
 
   const handleBuyNowClick = () => {
-    setCardToBuy({ productCode: 'WP002', price: 20000 })
+    setCardToBuy({ productCode: 'WP003', price: 38000 })
   }
 
   const renderBuyButton = () => {
@@ -57,7 +57,7 @@ const WP002 = () => {
     } else {
       return (
         <div className="detail-row-confirm">
-          <div>5 X</div>
+          <div>10 X</div>
           <div>1 month WP</div>
           <div>CDN service, NOT included</div>
         </div>
@@ -78,4 +78,4 @@ const WP002 = () => {
   )
 }
 
-export default WP002
+export default WP003

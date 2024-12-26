@@ -2,9 +2,10 @@ import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { Context as CardsContext } from '../../../../context/CardsContext'
-import { Context as YocoContext } from '../../../../context/YocoContext'
+import { Context as PayfastContext } from '../../../../context/PayfastContext'
 import WP001 from '../../../common/products/WP001'
 import WP002 from '../../../common/products/WP002'
+import WP003 from '../../../common/products/WP003'
 import './cardToBuyConfirm.css'
 
 const CardToBuyConfirm = () => {
@@ -13,7 +14,7 @@ const CardToBuyConfirm = () => {
     setCardToBuy,
   } = useContext(CardsContext)
 
-  const { setConfirmPurchase } = useContext(YocoContext)
+  const { setConfirmPurchase } = useContext(PayfastContext)
 
   const navigate = useNavigate()
 
@@ -23,6 +24,8 @@ const CardToBuyConfirm = () => {
         return <WP001 />
       case 'WP002':
         return <WP002 />
+      case 'WP003':
+        return <WP003 />
       default:
         return null
     }

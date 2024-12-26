@@ -1,27 +1,48 @@
 .dashboard-container {
   min-height: 100vh;
-  padding: 16px;
   position: relative;
   display: flex;
   flex-direction: column;
 }
 
-.signout-button {
-  position: absolute;
-  top: 16px;
-  right: 16px;
+
+.dashboard-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 100%;
+}
+
+.nav-button {
   padding: 8px 16px;
-  background-color: transparent;
-  border: 1px solid #ff3b30;
-  color: #ff3b30;
+  background-color: #f4d63d;
+  border: 1px solid #f4d63d;
+  color: #000000;
+  font-weight: 900;
   border-radius: 6px;
   font-weight: 500;
   cursor: pointer;
-  z-index: 10;
+  margin: 0 8px;
+}
+
+.nav-button:hover {
+  background-color: #ebca2a;
+}
+
+.signout-button {
+  padding: 8px 16px;
+  background-color: #ff3b30;
+  border: 1px solid #ff3b30;
+  color: #ffffff;
+  font-weight: 700;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  margin: 0 8px;
 }
 
 .signout-button:hover {
-  background-color: #ff3b30;
+  background-color: #f9281d;
   color: white;
 }
 
@@ -31,7 +52,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-top: 60px;
+  padding-top: 20px;
   width: 100%;
   max-width: 100%;
 }
@@ -50,9 +71,8 @@
     padding: 24px;
   }
 
-  .signout-button {
-    top: 24px;
-    right: 24px;
+  .dashboard-buttons-container {
+    padding: 5px;
   }
 
   .dashboard-content > div {

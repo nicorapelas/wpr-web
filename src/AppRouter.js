@@ -17,6 +17,7 @@ import CheckoutPage from './components/screens/checkout/Checkout'
 import PaymentSuccess from './components/screens/checkout/PaymentSuccess'
 import PaymentCancelled from './components/screens/checkout/PaymentCancelled'
 import CardsAdmin from './components/screens/cardsAdmin/CardsAdmin'
+import MyCards from './components/screens/myCards/MyCards'
 import { Context as AuthContext } from './context/AuthContext'
 
 const AppRouter = () => {
@@ -70,6 +71,7 @@ const AppRouter = () => {
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/payment-success" element={<PaymentSuccess />} />
             <Route path="/payment-cancelled" element={<PaymentCancelled />} />
+            <Route path="/my-cards" element={<MyCards />} />
             {/* Admin Routes */}
             <Route path="/cards-admin" element={<CardsAdmin />} />
             {/* Auth Routes */}

@@ -5,8 +5,6 @@ import { cardsData } from './cardBatchToUpload/cardBatchToUpload'
 const CardsList = ({ cards, onViewDetails }) => {
   const { createCardBatch } = useContext(CardsContext)
 
-  console.log(cards)
-
   const createNewCardBatch = async () => {
     const cardsWithBatch = cardsData.cards.map((card) => ({
       ...card,
@@ -54,7 +52,6 @@ const CardsList = ({ cards, onViewDetails }) => {
             <tr>
               <th>Batch ID</th>
               <th>Product</th>
-              <th>Product Code</th>
               <th>Card No.</th>
               <th>Password</th>
               <th>Status</th>
@@ -71,7 +68,6 @@ const CardsList = ({ cards, onViewDetails }) => {
                   <span className="batch-id">{card.batchId}</span>
                 </td>
                 <td>{card.product}</td>
-                <td>{card.productCode || '-'}</td>
                 <td>{card.cardNo}</td>
                 <td>{card.password}</td>
                 <td>

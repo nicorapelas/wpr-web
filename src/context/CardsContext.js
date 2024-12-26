@@ -21,6 +21,10 @@ const CardsReducer = (state, action) => {
       return { ...state, error: null }
     case 'SET_CARD_TO_BUY':
       return { ...state, cardToBuy: action.payload }
+    case 'FETCH_CARD_OWNER':
+      return { ...state, cardOwner: action.payload }
+    case 'FETCH_USER_CARDS':
+      return { ...state, userCards: action.payload, loading: false }
     default:
       return state
   }
@@ -74,6 +78,19 @@ const setCardToBuy = (dispatch) => async (data) => {
   dispatch({ type: 'SET_CARD_TO_BUY', payload: data })
 }
 
+const fetchUsersCards = (dispatch) => async () => {
+  dispatch({ type: 'LOADING' })
+  const response = await ngrokApi.get('/cards/fetch-user-cards')
+  console.log(response.data)
+  dispatch({ type: 'FETCH_USER_CARDS', payload: response.data })
+}
+
+// Admin Action
+const fetchCardOwner = (dispatch) => async (ownerId) => {
+  const response = await ngrokApi.post('/cards/fetch-card-owner', { ownerId })
+  dispatch({ type: 'FETCH_CARD_OWNER', payload: response.data })
+}
+
 export const { Provider, Context } = createDataContext(
   CardsReducer,
   {
@@ -81,6 +98,8 @@ export const { Provider, Context } = createDataContext(
     createCardBatch,
     clearError,
     setCardToBuy,
+    fetchCardOwner,
+    fetchUsersCards,
   },
   {
     cards: [],
@@ -88,5 +107,7 @@ export const { Provider, Context } = createDataContext(
     loading: false,
     error: null,
     cardToBuy: null,
+    cardOwner: null,
+    userCards: [],
   },
 )
