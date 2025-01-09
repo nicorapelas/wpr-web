@@ -8,7 +8,6 @@ import {
 
 import LoaderFullScreen from './components/common/loaders/fullScreenLoader/LoaderFullScreen'
 import NotFound from './components/common/notFound/NotFound'
-import Landing from './components/screens/landing/Landing'
 import SignupHR from './components/screens/authScreens/signup/Signup'
 import Login from './components/screens/authScreens/login/Login'
 import Dashboard from './components/screens/dashboard/Dashboard'
@@ -18,6 +17,9 @@ import PaymentSuccess from './components/screens/checkout/PaymentSuccess'
 import PaymentCancelled from './components/screens/checkout/PaymentCancelled'
 import CardsAdmin from './components/screens/cardsAdmin/CardsAdmin'
 import MyCards from './components/screens/myCards/MyCards'
+import PaymentHistory from './components/screens/paymentHistory/PaymentHistory'
+import AdminPanel from './components/screens/adminPanel/AdminPanel'
+import Home from './components/screens/home/Home'
 import { Context as AuthContext } from './context/AuthContext'
 
 const AppRouter = () => {
@@ -74,6 +76,8 @@ const AppRouter = () => {
             <Route path="/my-cards" element={<MyCards />} />
             {/* Admin Routes */}
             <Route path="/cards-admin" element={<CardsAdmin />} />
+            <Route path="/payment-history" element={<PaymentHistory />} />
+            <Route path="/admin-panel" element={<AdminPanel />} />
             {/* Auth Routes */}
             <Route
               path="/login"
@@ -81,7 +85,7 @@ const AppRouter = () => {
             />
             <Route path="/signup" element={<SignupHR />} />
             {/* Public Routes */}
-            <Route path="/" element={<Landing />} />
+            <Route path="/" element={<Home />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Router>

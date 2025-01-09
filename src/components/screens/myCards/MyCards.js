@@ -28,10 +28,12 @@ const MyCards = () => {
   if (!userCards || userCards.length === 0) {
     return (
       <div className="card-info">
+        <button className="nav-button" onClick={handleBackButtonPress}>
+          Back
+        </button>
         <div className="info-section">
           <h4>My Cards</h4>
-          <p className="text-white opacity-70">No cards available.</p>
-        </div>
+          <p style={{ color: '#ffff' }}>No cards available.</p>        </div>
       </div>
     )
   }
