@@ -5,12 +5,12 @@
   flex-direction: column;
 }
 
-
 .dashboard-buttons-container {
   display: flex;
   justify-content: space-between;
   width: 100%;
   max-width: 100%;
+  margin-top: 20px;
 }
 
 .nav-button {
@@ -54,11 +54,12 @@
   justify-content: center;
   padding-top: 20px;
   width: 100%;
-  max-width: 100%;
+  max-width: 88%;
 }
 
 /* Add these styles to control WP001 size */
-.dashboard-content > div {  /* This targets the WP001 component */
+.dashboard-content > div {
+  /* This targets the WP001 component */
   width: 100%;
   max-width: 300px;
   margin: 0 auto;
@@ -78,4 +79,271 @@
   .dashboard-content > div {
     max-width: 400px;
   }
+}
+
+.status-succeeded {
+  color: #10b981;
+  background-color: #d1fae5;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.table-responsive {
+  overflow-x: auto;
+  margin-top: 1rem;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #374151;
+}
+
+.table th {
+  background-color: #1f2937;
+  color: #ffffff;
+}
+
+.table tbody tr {
+  margin-bottom: 5px;
+  border-bottom: 5px solid transparent;
+}
+
+.table tbody tr:last-child {
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+.font-mono {
+  font-family: monospace;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.show-user-btn {
+  padding: 6px 12px;
+  background-color: #f4d63d;
+  border: 1px solid #f4d63d;
+  color: rgb(0, 0, 0);
+  border-radius: 4px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.show-user-btn:hover {
+  background-color: #ffe564;
+}
+
+.total-row {
+  background-color: #1f2937;
+  font-weight: 500;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.total-row td {
+  border-top: 2px solid #374151;
+}
+
+.admin-panel-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.admin-card {
+  background-color: #1f2937;
+  border: 1px solid #374151;
+  border-radius: 8px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.admin-card:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border-color: #3b82f6;
+}
+
+.admin-card h3 {
+  color: #ffffff;
+  margin: 0 0 10px 0;
+  font-size: 1.25rem;
+}
+
+.admin-card p {
+  color: #9ca3af;
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .admin-panel-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cards-owing-container {
+  width: 100%;
+  margin: 20px 0;
+}
+
+.cards-owing-container h3 {
+  color: #ffffff;
+  margin-bottom: 16px;
+  font-size: 1.25rem;
+}
+
+.cards-owing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.cards-owing-card {
+  background-color: #1f2937;
+  border: 1px solid #374151;
+  border-radius: 8px;
+  padding: 16px;
+  transition: all 0.3s ease;
+}
+
+.cards-owing-card:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border-color: #3b82f6;
+}
+
+.cards-owing-details p {
+  color: #9ca3af;
+  margin: 8px 0;
+  font-size: 0.875rem;
+}
+
+.cards-owing-details .font-mono {
+  font-family: monospace;
+  color: #f4d63d;
+}
+
+.cards-owing-loading,
+.cards-owing-empty {
+  text-align: center;
+  padding: 20px;
+  color: #9ca3af;
+  font-size: 1rem;
+}
+
+.cards-owing-error {
+  text-align: center;
+  padding: 20px;
+  color: #ff3b30;
+  font-size: 1rem;
+}
+
+@media (max-width: 640px) {
+  .cards-owing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cards-owing-card {
+    margin-bottom: 12px;
+  }
+}
+
+.settle-button {
+  padding: 8px 16px;
+  background-color: #f4d63d;
+  border: 1px solid #f4d63d;
+  color: #000000;
+  font-weight: 700;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 12px;
+  width: 100%;
+  transition: background-color 0.2s;
+}
+
+.settle-button:hover {
+  background-color: #ebca2a;
+}
+
+.cards-owing-details {
+  margin-bottom: 8px;
+}
+
+.status-button {
+  padding: 4px 12px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.status-button.used {
+  background-color: #ff4444;
+  color: white;
+}
+
+.status-button.unused {
+  background-color: #00c851;
+  color: white;
+}
+
+.admin-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.view-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.view-button {
+  background-color: #1f2937;
+  border: 1px solid #374151;
+  border-radius: 6px;
+  color: #9ca3af;
+  cursor: pointer;
+  padding: 4px 12px;
+  transition: all 0.2s;
+  font-size: 0.875rem;
+  line-height: 1.25;
+  width: 60px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.view-button:hover {
+  color: #ffffff;
+  background-color: #2d3748;
+  border-color: #4b5563;
+}
+
+.my-cards-header-spacer {
+  margin-bottom: 5px;
 }

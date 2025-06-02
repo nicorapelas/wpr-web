@@ -98,6 +98,37 @@ form {
   color: #048ef1;
 }
 
+.auth-toggle-container {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.auth-toggle-button {
+  background: none;
+  border: none;
+  color: #3da9f4;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: underline;
+  padding: 0;
+}
+
+.auth-toggle-button:hover {
+  color: #048ef1;
+}
+
+.password-reset-container-api-message-container {
+  color: #2ecc71;
+  margin: 5px;
+  text-align: center;
+}
+
+.password-reset-container-error-container {
+  color: #e74c3c;
+  margin: 5px;
+  text-align: center;
+}
+
 @media screen and (max-width: 500px) {
   .auth-slogen {
     font-size: 10px;

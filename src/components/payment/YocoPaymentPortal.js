@@ -31,9 +31,9 @@ const YocoPaymentPortal = () => {
   }, [loading])
 
   useEffect(() => {
-    console.log(cardToBuy)
-
+    console.log(`cardToBuy:`, cardToBuy)
     if (confirmPurchase && cardToBuy) {
+      console.log(`let's go`)
       setPaymentTriggered(true)
     }
   }, [confirmPurchase, cardToBuy])
@@ -47,6 +47,8 @@ const YocoPaymentPortal = () => {
   const navigate = useNavigate()
 
   const handleConfirmedPurchase = async () => {
+    console.log(`at handleConfirmedPurchase`)
+
     setPaymentTriggered(false)
     const { productCode, price } = cardToBuy
     try {
@@ -59,7 +61,6 @@ const YocoPaymentPortal = () => {
 
   const handlePayment = async (productCode, price) => {
     console.log(`im running...!`)
-
     try {
       setLoading(true)
       setError(null)

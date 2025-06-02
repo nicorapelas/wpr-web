@@ -12,7 +12,7 @@ const NotFound = () => {
         <p className="error-description">
           Oops! The page you're looking for doesn't exist or has been moved.
         </p>
-        <Link to="/" className="home-button">
+        <Link to="/dashboard" className="home-button">
           Back to Home
         </Link>
       </div>

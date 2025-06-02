@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import logo from '../../../assets/images/logo/logo-home.png'
 import background from '../../../assets/images/background/a-1.png'
@@ -11,11 +12,11 @@ const Home = () => {
         <div className="logo-container">
           <img src={logo} alt="logo" />
         </div>
-        {/* <div className="nav-buttons">
-          <button className="nav-btn">Button 1</button>
-          <button className="nav-btn">Button 2</button>
-          <button className="nav-btn">Button 3</button>
-        </div> */}
+        <div className="nav-buttons">
+          <Link to="/login">
+            <button className="nav-btn">Login</button>
+          </Link>
+        </div>
       </header>
 
       <main className="main-content">
